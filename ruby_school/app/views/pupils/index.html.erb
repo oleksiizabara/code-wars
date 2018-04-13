@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+<h2>by class</h2>
+
+<% for i in (1..12) %> 
+  <a href="/pupils?class=<%= i %>">
+    <div class="classroom_span">
+      <%= "#{i} class" %>
+    </div>
+  </a>
+<% end %>
+
+<h2>all pupils</h2>
+
+<table>
+  <tbody>
+    <% @pupils.each do |pupil| %>
+      <tr>
+        <td><%= link_to pupil.name, pupil %></td>
+        <td><%= "class: #{pupil.classroom}" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

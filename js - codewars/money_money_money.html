@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+            <!--    
+                Mr. Scrooge has a sum of money 'P' that wants to invest, 
+                and he wants to know how many years 'Y' this sum has to be 
+                kept in the bank in order for this sum of money to amount to 'D'.
+
+                The sum is kept for 'Y' years in the bank where interest 'I' is paid 
+                yearly, and the new sum is re-invested yearly after paying tax 'T'
+        
+                Note that the principal is not taxed but only the year's accrued interest
+            -->
+
+    <script>
+        function calculateYears(principal, interest, tax, desired) {
+            var years = 0;
+
+            while (desired > principal) {
+              principal += principal*interest*(1 - tax);
+              years ++;
+            }
+            return years;
+        }
+
+        console.log(calculateYears(1000,0.01625,0.18,1200));
+    </script>
+    
+</body>
+</html>

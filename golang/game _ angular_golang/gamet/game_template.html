@@ -1,0 +1,38 @@
+    <div ng-controller="task" id="currentgame" align="center">
+        <button class="close_btn" ng-click="stopGame()">x</button>
+        <!-- <div class="name_gamer" >
+            [[[.Gamer.Name]]]     
+        </div> -->
+        <div id="cntr" class="counter" >
+            Бали: {{ gamerCurrentPoints }}     
+        </div>
+        <div id="cntr_level" class="counter" >
+            Рівень: {{ gamerCurrentLevel }}    
+        </div>
+        <div id="q" align="center"></div>
+        <div class="questions"  align="center">
+            <div class="task_title">
+                Обери правильний варіант:
+            </div>
+            <div >
+                <div class="variant" id="f" ng-click="stopTimer()" >
+                {{ firstQuestion }}
+                </div>
+                <div class="variant" id="s" ng-click="stopTimer()" >
+                {{ secondQuestion }}
+                </div>
+                <input id="number" type="hidden" value="{{ numberOfQuestion }}">
+            </div>
+        </div>
+        <div class="timer" align="center">
+            {{ time }}
+        </div>
+        <div id="i" class="interest_fact" align="center">
+            <div class="task_title">
+                а чи знаєш ти, що...
+            </div>
+            {{ interestFact }}
+        </div>
+        
+    </div>
+

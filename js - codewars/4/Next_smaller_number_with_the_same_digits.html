@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+            <!--    
+                Write a function that takes a positive integer and returns the next smaller 
+                positive integer containing the same digits.
+            -->
+
+    <script>
+        function nextSmaller(n) {
+            var t = n;
+            if (t.toString().split('').sort().join('') === n.toString()) {
+              return -1;
+            }
+            var number = n-9;
+            var min = n.toString().split('').sort().join('');
+            var num = n.toString().split('');
+            var s = n.toString().split('').sort().join('');
+            if (t.toString().indexOf('0') != -1) {
+              var nt = t.toString().split('0').join('').split('').sort();
+              for (var i = 0; i < s.length-nt.length; i++) {
+                nt.splice(1, 0, "0");
+              }
+              if(nt.join('')*1 >min*1)
+              min = nt.join(''); 
+            }
+            while (number >= 1*min) {
+              if (number.toString().split('').sort().join('') === s ){
+                return number;
+                break;
+              }
+              number = 1*number-9;
+            }
+            return -1;
+          }
+
+        console.log(nextSmaller(2081));
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="/styles/game.css">
+<script src="/js/game.js"></script>
+
+<div class="game_cnt"  ng-app="app">
+    <div class="game_template" ng-init="firstQuestion = '[[[.Question.FirstVariant]]]'; 
+                                        secondQuestion = '[[[.Question.SecondVariant]]]'; 
+                                        numberOfQuestion ='[[[.Question.Number]]]';
+                                        gamerCurrentPoints = '[[[.Gamer.Points]]]';
+                                        gamerCurrentLevel = '[[[.Gamer.Level]]]'">
+        <div id="gc"></div>
+        <div class="game_option" align="center">
+            
+            <div class="add_question" ng-conrroller="addquestion"></div>
+            <div class="name_gamer" >
+                [[[.Gamer.Name]]]     
+            </div>
+            <div ng-controller="userValues">
+                <div id="cntr" class="currentValues" >
+                    Бали: {{dataExchange.points }}     
+                </div>
+                <div id="cntr_level" class="currentValues" >
+                    Рівень: {{ dataExchange.level }}    
+                </div>
+            </div>
+            <gamestart></gamestart>
+        </div>
+        <input id="numberid" type="hidden" value="[[[.Gamer.NumberId]]]">
+        <input id="pp" type="hidden" value="[[[.Gamer.Points]]]">
+        <input id="ll" type="hidden" value="[[[.Gamer.Level]]]">
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+            <!--    
+                A Narcissistic Number is a number which is the sum of its own digits, 
+                each raised to the power of the number of digits.
+            -->
+
+    <script>
+        function narcissistic( value ) {
+
+            value = Math.abs(value);
+            var number = value;
+            var arr = [];
+            var sum = 0;
+            var count = 0;
+
+            while (value >= 1) {
+              arr.push(value%10);
+              value = (value - value%10)/10;
+              count++;
+            }
+            for (var i = 0; i < count; i++) {
+              sum+= Math.pow(arr[i], count);
+            }
+            return sum === number;
+          }
+          
+
+          console.log(narcissistic(153));
+    </script>
+    
+</body>
+</html>

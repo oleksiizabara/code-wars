@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+            <!--    
+                Write a function that takes a string of braces, and determines if 
+                the order of the braces is valid. It should return true if the string is 
+                valid, and false if it's invalid.
+
+                This Kata is similar to the Valid Parentheses Kata, but introduces new characters: 
+                brackets [], and curly braces {}. Thanks to @arnedag for the idea!
+
+                All input strings will be nonempty, and will only consist of parentheses, 
+                brackets and curly braces: ()[]{}.
+            -->
+
+    <script>
+        function validBraces(braces) {
+            var open = ['(', '[', '{'];
+            var close = [')', ']', '}'];
+         
+            var chekArr = [];
+         
+            if (braces.length % 2 !== 0) {
+               return false
+            }
+         
+            for (var i = 0; i < braces.length; i++) {
+               var index = open.indexOf(braces[i]);
+               if (index != -1) {
+                  chekArr.push(braces[i]);
+               } else {
+                  var closeIndex = close.indexOf(braces[i]);
+                  if (chekArr[chekArr.length - 1] === open[closeIndex]) {
+                     chekArr.pop();
+                  }
+               }
+            }
+            return chekArr.length === 0;
+         }
+
+
+    </script>
+    
+</body>
+</html>

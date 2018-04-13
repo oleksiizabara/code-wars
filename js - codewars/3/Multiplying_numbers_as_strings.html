@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+            <!--    
+                This is the first part. You can solve the second part here when you are done with this.
+                Multiply two numbers! Simple!
+
+                The arguments are passed as strings.
+                The numbers may be way very large
+                Answer should be returned as a string
+                The returned "number" should not start with zeros e.g. 0123 is invalid
+                Note: 100 randomly generated tests!
+            -->
+
+    <script>
+        function multiply(a, b){
+
+            var aa = deleteZero(a), bb = deleteZero(b);
+           
+              if (aa.length <= 4 && bb.length <= 4) {
+                return (a*1*b).toString();
+              }
+          
+              var arrSum = [];
+              var numberOfZeroAfter = 0;
+          
+              for (var t = bb.length - 1; t >= 0; t-- ) {
+                var remember = 0;
+                n = parseInt(bb[t]);
+                var numb = [];
+                for (var i = aa.length - 1; i >= 0; i --) {
+                  var mult = (aa[i]*n + remember).toString();
+                  if (i === 0) {  
+                    if (mult.length > 1) {
+                      numb.push(mult[1]);
+                      numb.push(mult[0]);
+                    } else {
+                      numb.push(mult[0]);
+                      remember = 0;
+                    }      
+                  } else{
+                    if (mult.length > 1) {
+                      numb.push(mult[1]);
+                      remember = parseInt(mult[0]);
+                    } else {
+                      numb.push(mult[0]);
+                      remember = 0;
+                    }      
+                  }
+                }
+                var m = numb.reverse().join('');
+                var k = numberOfZeroAfter;
+                while (k > 0) {
+                  m+='0';
+                  k--;
+                }
+                arrSum.push(m);
+                numberOfZeroAfter ++;
+              }
+          
+              var sums = arrSum;
+              sums.sort((a,b)=> a.length - b.length);
+              var maxLen = sums[sums.length -1].length;
+          
+              for (var i = 0; i < arrSum.length; i++) {
+                var l = arrSum[i].length;
+                while (l < maxLen) {
+                  arrSum[i] = '0' + arrSum[i];
+                  l++;
+                }
+              }
+              return  (findSum(arrSum, maxLen).join(''));
+            }
+          
+            function deleteZero(str) {
+              newStr = ''
+              var ifNotBefore = false;
+              for (var i = 0; i < str.length; i ++) {
+                if (!ifNotBefore && str[i] === '0') {
+                  continue;
+                } else {
+                  ifNotBefore = true;
+                  newStr+=str[i];
+                }
+              }
+              return newStr;
+            }
+          
+          function findSum(arr, maxLen) {
+            var sum = arr[0];
+            var sumC = new Array(maxLen);
+            for (var i = 1; i < arr.length; i++) {
+              var remember = 0;
+              var next = arr[i].split('');
+              for (var t = maxLen - 1; t >= 0; t--) {
+                s = (sum[t]*1 + next[t]*1 + remember).toString();
+                if (t !== 0) {
+                  if (s.length > 1) {
+                    sumC[t] = s[1];
+                    remember = 1*s[0];
+                  } else {
+                    sumC[t] = s[0];
+                    remember = 0;
+                  }
+                  } else {
+                    sumC[t] = s
+                  }
+              }
+              sum = sumC;
+            }
+            
+            while (sumC[0] === '0'){
+              sum.splice(0,1);
+            }
+            return sumC;
+          }
+
+    </script>
+    
+</body>
+</html>

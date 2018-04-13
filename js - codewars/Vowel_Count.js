@@ -1,0 +1,1 @@
+const getCount = s => s.split('').filter(i => RegExp(/[aeiou]/).test(i)).length

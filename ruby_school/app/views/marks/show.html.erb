@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>For pupil:</strong>
+  <%= @mark.for_pupil_id %>
+</p>
+
+<p>
+  <strong>Subj:</strong>
+  <%= @mark.subj %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @mark.date %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @mark.value %>
+</p>
+
+<%= link_to 'Edit', edit_mark_path(@mark) %> |
+<%= link_to 'Back', marks_path %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  for_pupil_id: MyString
+  subj: MyString
+  date: 2018-02-27
+  value: 1
+
+two:
+  for_pupil_id: MyString
+  subj: MyString
+  date: 2018-02-27
+  value: 1

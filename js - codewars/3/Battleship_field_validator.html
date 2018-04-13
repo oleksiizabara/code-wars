@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+            <!--    
+                Write a method that takes a field for well-known board game "Battleship" as an 
+                argument and returns true if it has a valid disposition of ships, false otherwise. 
+                Argument is guaranteed to be 10*10 two-dimension array. Elements in the array are numbers, 
+                0 if the cell is free and 1 if occupied by ship.
+
+                Battleship (also Battleships or Sea Battle) is a guessing game for two players. Each player 
+                has a 10x10 grid containing several "ships" and objective is to destroy enemy's forces by 
+                targetting individual cells on his field. The ship occupies one or more cells in the grid. 
+                Size and number of ships may differ from version to version. In this kata we will 
+                use Soviet/Russian version of the game.
+            -->
+
+    <script>
+        function validateBattlefield(field) {
+            var ships = [0,0,0,0];
+            var shipsTrue = [1,2,3,4]
+          
+            for (var i = 0; i < 9; i ++) {
+              for(var t = 0; t < 9; t ++) {
+                if (!checkSquare(i, t, field)) {
+                  return false;
+                }
+              }
+            }
+          
+            for (var i = 0; i < 10; i ++) {
+              for (var t = 0; t < 10; t ++) {
+                if (field[i][t] === 1) {
+                  findShip(i,t,field, ships);
+                }
+              }
+            }
+            if (ships.join('') != shipsTrue.join('')) {
+              return false;
+            }
+          
+            return true;
+          }
+          
+          function checkSquare(i, t, field) {
+            var count = 0;
+            for (var j = i; j < i + 2; j ++) {
+              for (var k = t; k < t + 2; k++) {
+                if (field[j][k] === 1) {
+                  count++;
+                }
+              }
+            }
+          
+            if (count === 2 && ((field[i][t] === 1 && field[i+1][t+1] === 1) || (field[i][t+1] === 1 && field[i+1][t] === 1))) {
+              return false;
+            }
+            return true;
+          }
+          
+          function findShip(i,t,field, ships) {
+            var g = 0, v = 0, j = i, k = t;
+          
+            while (field[j][k] != 0 && k < 10) {
+              if (field[j][k] === 1 || field[j][k] === '*') {
+                field[j][k] = '*';
+                k++; g++;
+              }
+            }
+            j = i; k = t;
+          
+            while (field[j][k] != 0 && j < 10) {
+              if (field[j][k] === 1 || field[j][k] === '*') {
+                field[j][k] = '*';
+                j++; v++;
+              }
+            }
+          
+            var max = Math.max(g,v);
+          
+           if (max === 1) {
+            ships[3]++;
+           }
+           if (max === 2) {
+            ships[2]++;
+           }
+           if (max === 3) {
+            ships[1]++;
+           }
+           if (max === 4) {
+            ships[0]++;
+           }
+          }
+
+    </script>
+    
+</body>
+</html>

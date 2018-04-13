@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+            <!--    
+                In this kata you get the start number and the end number of a 
+                region and should return the count of all numbers except numbers 
+                with a 5 in it. The start and the end number are both inclusive!
+            -->
+
+    <script>
+        function dontGiveMeFive(start, end){
+          count = 0;
+           
+            for (i = start; i <= end; i++) {
+                if (i.toString().indexOf('5') != -1) {
+                    count ++;
+                }
+            }
+            return end - start + 1 - count;
+        } 
+    </script>
+    
+</body>
+</html>

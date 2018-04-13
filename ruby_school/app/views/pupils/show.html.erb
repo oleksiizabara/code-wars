@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Login:</strong>
+  <%= @pupil.login %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @pupil.name %>
+</p>
+
+<p>
+  <strong>Class:</strong>
+  <%= @pupil.classroom %>
+</p>
+
+<% if session[:status] == 'teacher' || session[:user_id] == @pupil.id %>
+  <p>
+    <strong>Password:</strong>
+    <%= @pupil.password %>
+  </p>
+<% end %>
+
+<% if session[:status] == 'teacher' || session[:user_id] == @pupil.id %>
+  <%= link_to 'Edit', edit_pupil_path(@pupil) %> |
+  <%= link_to 'Destroy', @pupil, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= link_to 'view marks', marks_path(:id => @pupil.login) %> |
+<% end %>
+<% if session[:status] == 'teacher' %>
+  <%= link_to 'put mark', new_mark_path(:to => @pupil.login) %> |
+<% end %>
+<%= link_to 'Back', pupils_path %>

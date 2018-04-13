@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+            <!--    
+                Create two functions to encode and then decode a string using the Rail Fence Cipher. 
+                This cipher is used to encode a string by placing each character successively in a diagonal 
+                along a set of "rails". First start off moving diagonally and down. When you reach the bottom,
+                reverse direction and move diagonally and up until you reach the top rail. Continue until you 
+                reach the end of the string. Each "rail" is then read left to right to derive the encoded string. 
+                You can optionally include or dis-include punctuation.
+            -->
+
+    <script>
+        function encodeRailFenceCipher(string, numberRails) {
+            var arr = [];
+            var letter = [];
+            var count = 1;
+            var isPlus = true;
+        
+            for (var i = 0; i < string.length; i++) {
+                letter = [string[i], count]
+                arr.push(letter);
+                if (isPlus) {
+                    count++;
+                } else {
+                    count--;
+                }
+        
+                if (count === numberRails) {
+                    isPlus = false;
+                }
+                if (count === 1) {
+                    isPlus = true;
+                }
+            }
+            var str = '';
+            for (var i = 1; i <= numberRails; i++) {
+                for (var t = 0; t < arr.length; t++) {
+                    if (arr[t][1] === i) {
+                        str += arr[t][0];
+                    }
+                }
+            }
+            return str;
+        }
+        
+        function decodeRailFenceCipher(string, numberRails) {
+            var arr = [];
+            var index = 0;
+            var n = 0,
+                m = 0;
+            var isPlus = true;
+        
+            for (var i = 0; i < numberRails; i++) {
+                arr[i] = [];
+                for (var t = 0; t < string.length; t++) {
+                    arr[i][t] = " ";
+                }
+            }
+        
+            for (var t = 0; t < string.length; t++) {
+                arr[n][m] = 'letter';
+                m++;
+                if (isPlus) {
+                    n++;
+                } else {
+                    n--;
+                }
+                if (n === numberRails - 1) {
+                    isPlus = false;
+                }
+                if (n === 0) {
+                    isPlus = true;
+                }
+            }
+        
+            for (var i = 0; i < numberRails; i++) {
+                for (var j = 0; j < string.length; j++) {
+                    if (arr[i][j] == 'letter' && index < string.length) {
+                        arr[i][j] = string[index];
+                        index++;
+                    }
+                }
+            }
+        
+            n = 0, m = 0;
+            var str = '';
+            for (var i = 0; i < string.length; i++) {
+        
+                if (n == 0) {
+                    isPlus = true;
+                }
+        
+                if (n == numberRails - 1) {
+                    isPlus = false;
+                }
+        
+                if (arr[n][m] != '') {
+                    str += arr[n][m];
+                }
+                m++;
+        
+                if (isPlus) {
+                    n++;
+                } else {
+                    n--;
+                }
+            }
+            return str;
+        }
+        
+        console.log(encodeRailFenceCipher('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 3));
+        console.log(decodeRailFenceCipher('AEIMQUYBDFHJLNPRTVXZCGKOSW', 3));
+    </script>
+    
+</body>
+</html>

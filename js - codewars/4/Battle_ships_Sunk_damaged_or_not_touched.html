@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+            <!--    
+                Task
+                Your task in the kata is to determine how many boats are sunk damaged and untouched 
+                from a set amount of attacks. You will need to create a function that takes two arguments, 
+                the playing board and the attacks.
+
+
+                Boats are placed either horizontally, vertically or diagonally on the board. 
+                0 represents a space not occupied by a boat. Digits 1-3 represent boats which vary in 
+                length 1-4 spaces long. There will always be at least 1 boat up to a maximum of 3 in any one game. 
+                Boat sizes and board dimentions will vary from game to game.
+
+                Attacks
+                Attacks are calculated from the bottom left, first the X coordinate then the Y. 
+                There will be at least one attack per game, and the array will not contain duplicates.
+
+                Scoring
+                1 point for every whole boat sank.
+                0.5 points for each boat hit at least once (not including boats that are sunk).
+                -1 point for each whole boat that was not hit at least once.
+                Sunk or Damaged
+                sunk = all boats that are sunk
+                damaged = all boats that have been hit at least once but not sunk
+                notTouched/not_touched = all boats that have not been hit at least once
+            -->
+
+    <script>
+        function damagedOrSunk (board, attacks){
+
+            for (var i = 0; i < attacks.length; i++) {
+              attacks[i] = [board.length - attacks[i][1], attacks[i][0]-1]
+            }
+
+            var sunk = 0, damaged = 0, notTouched = 0, points = 0;
+            var allShipsCoords = [];
+          
+            for (var i = 0; i < board.length; i ++) {
+              for (var t = 0; t < board[0].length; t++) {
+                if (board[i][t] == 1 || board[i][t] == 2 || board[i][t] == 3) {
+                  var ship = [];
+                  var typeOfShip = board[i][t];
+                  ship.push([i, t]);
+                  board[i][t] = '*';
+                  findAnotherCoords(board, ship, typeOfShip, i, t);
+                  allShipsCoords.push(ship);
+                }
+              }
+            }
+          
+            var ships = [];
+          
+            for (var i = 0; i < allShipsCoords.length; i ++) {
+              var ship =  {
+                            length: allShipsCoords[i].length,
+                            damaged: 0,
+                            sunk: false,
+                            touch: false
+                          };
+              ships.push(ship);
+            }
+
+            for (var i = 0; i < attacks.length; i++) {
+              for (var t = 0; t < ships.length; t++) {
+                for (var k = 0; k < ships[t].length; k++) {
+                  if (allShipsCoords[t][k][0] === attacks[i][0] && allShipsCoords[t][k][1] === attacks[i][1]) {
+                    ships[t].damaged ++;
+                    ships[t].touch = true
+                    if (ships[t].length === ships[t].damaged) {
+                      ships[t].sunk = true;
+                    }
+                    continue;
+                  }
+                }
+              }
+            }
+
+            for (var i = 0; i < ships.length; i ++) {
+              points+= ships[i].damaged*0.5;
+              if(ships[i].damaged != 0 && !ships[i].sunk) {
+                damaged += ships[i].damaged;
+              }
+              if(ships[i].sunk) {
+                sunk++;
+                points++;
+              }
+              if(!ships[i].touch) {
+                notTouched ++;
+                points--;
+              }
+            }
+            return {sunk: sunk, damaged: damaged , notTouched: notTouched, points: points};
+          }
+          
+          function findAnotherCoords( board, ship, typeOfShip, i, t) {
+            if (t < board[0].length - 1 && board[i][t + 1] == typeOfShip) {
+              moveRight( board, ship, typeOfShip, i, t)
+            } else
+            if (i < board.length - 1 && board[i + 1][t] == typeOfShip) {
+              moveBottom( board, ship, typeOfShip, i, t)
+            } else
+            if (i < board.length - 1 && t < board[0].length - 1 && board[i + 1][t + 1] == typeOfShip) {
+              moveDiagonal( board, ship, typeOfShip, i, t)
+            }
+          }
+          
+          function moveRight(board, ship, typeOfShip, i, t) {
+            while (board[i][t+1] == typeOfShip) {
+              ship.push([i, t+1]);
+              board[i][t+1] = '*';
+              t++;
+            }
+          }
+          
+          function moveBottom(board, ship, typeOfShip, i, t) {
+            while (i < board.length - 1 && board[i+1][t] == typeOfShip) {
+              ship.push([i+1, t]);
+              board[i+1][t] = '*';
+              i++;
+            }
+          }
+          
+          function moveDiagonal(board, ship, typeOfShip, i, t) {
+            while (board[i+1][t+1] == typeOfShip) {
+              ship.push([i+1, t+1]);
+              board[i+1][t+1] = '*';
+              t++;
+              i++;
+            }
+          }
+          
+          
+          damagedOrSunk([ 
+                          [ 0, 0, 0, 0, 0, 0 ],
+                          [ 1, 0, 0, 0, 0, 0 ],
+                          [ 2, 2, 0, 0, 0, 0 ],
+                          [ 1, 0, 3, 3, 3, 0 ],
+                          [ 0, 0, 0, 0, 0, 0 ],
+                          [ 0, 0, 0, 0, 0, 0 ],
+                          [ 0, 0, 0, 0, 0, 0 ]
+                        ], 
+                              [
+                                [ 2, 2 ],
+                                [ 2, 3 ],
+                                [ 2, 1 ],
+                                [ 4, 3 ],
+                                [ 4, 4 ],
+                                [ 3, 3 ],
+                                [ 4, 1 ],
+                                [ 1, 2 ]
+            ]
+                        )
+    </script>
+    
+</body>
+</html>

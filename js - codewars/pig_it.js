@@ -1,0 +1,1 @@
+const pigIt = s => s.split(' ').map(i => i.match(/[a-z]/i) ? i.substr(1)  + i.substr(0, 1) + 'ay' : i).join(' ');

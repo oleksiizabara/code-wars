@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+            <!--    
+                The goal of this exercise is to convert a string to a new string where each 
+                character in the new string is '(' if that character appears only once in the original string,
+                or ')' if that character appears more than once in the original string. Ignore capitalization 
+                when determining if a character is a duplicate.
+
+                Examples:
+
+                "din" => "((("
+
+                "recede" => "()()()"
+
+                "Success" => ")())())"
+
+                "(( @" => "))(("
+            -->
+
+    <script>
+        function duplicateEncode(word) {
+
+            var specialChars = ['.', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '-', '=', '[', ']'];
+            var specialCharsReg = [/\./, /\!/, /\@/, /\#/, /\$/, /\%/, /\^/, /\&/, /\*/, /\(/, /\)/, /\_/, /\+/, /\-/, /\=/, /\[/, /\]/];
+
+            var arr = [];
+            for(var i = 0; i < word.length; i++) {
+              var a = specialChars.indexOf(word[i]);
+              if(a != -1) {
+                var char = new RegExp(specialCharsReg[a], 'gi');
+              } else {
+                var char = new RegExp(word[i], 'gi');
+              }
+              
+              if (word.match(char).length > 1) {
+
+                arr.push(')');
+              } else {
+                arr.push('(');
+              }
+            }
+            return arr.join('');
+          }
+
+          console.log(duplicateEncode('@ #$%^&*fks f '));
+    </script>
+    
+</body>
+</html>

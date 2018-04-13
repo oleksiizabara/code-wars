@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+            <!--    
+                Write an algorithm that will identify valid IPv4 addresses in dot-decimal format. 
+                IPs should be considered valid if they consist of four octets, with values between 0..255 (included).
+
+                Input to the function is guaranteed to be a single string.
+            -->
+
+    <script>
+        function isValidIP(str) {
+            var patternIp = /^((25[0-5]|2[0-4]\d|[01]?\d?\d)\.){3}(25[0-5]|2[0-4]\d|[01]?\d?\d)$/;
+            return patternIp.test(str);
+          }
+          
+          console.log(isValidIP('123.45.67.89'));
+    </script>
+    
+</body>
+</html>

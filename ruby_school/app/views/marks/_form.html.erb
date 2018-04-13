@@ -1,0 +1,36 @@
+<%= form_with(model: mark, local: true) do |form| %>
+  <% if mark.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mark.errors.count, "error") %> prohibited this mark from being saved:</h2>
+
+      <ul>
+      <% mark.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.hidden_field :for_pupil_id, value: params[:to] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subj %>
+    <%= form.text_field :subj, id: :mark_subj %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_select :date, id: :mark_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :value %>
+    <%= form.number_field :value, id: :mark_value %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Teachers</h1>
+
+<table>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.login, user %></td>
+        <td><%= user.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

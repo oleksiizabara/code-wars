@@ -1,0 +1,1 @@
+const toCamelCase = s => s === '' ? s : s.replace(/\-|_/g, ' ').split(' ').map((i,t) => t !== 0 ? i[0].toUpperCase() + i.substr(1) : i).join('');
